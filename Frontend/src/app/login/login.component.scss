@@ -1,0 +1,16 @@
+.login-panel{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    flex-direction: column;
+    margin-top: 250px;
+}
+.login-card{
+    display: flex;
+    justify-content: center;
+    align-self: center;
+}
+.login-label{
+    padding-bottom: 30px;
+    align-self: baseline;
+}

@@ -7,12 +7,37 @@ import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './home/home.component';
 import { EmployeeTableComponent } from './employeetable/employeetable.component';
+import { LoginComponent } from './login/login.component';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIcon, MatIconModule} from '@angular/material/icon';
+import {MatFormFieldModule} from '@angular/material/form-field';
+import {MatInputModule} from '@angular/material/input';
+import {MatTooltipModule} from '@angular/material/tooltip';
+import {MatCommonModule} from '@angular/material/core';
+import {MatCard, MatCardModule} from '@angular/material/card';
+import { HttpClient, HttpClientModule } from '@angular/common/http';
+import {MatSnackBarModule} from '@angular/material/snack-bar';
+import { ChartsComponent } from './charts/charts.component';
+import { GridModule } from '@syncfusion/ej2-angular-grids';
+import { ChartModule, LineSeriesService, CategoryService, LegendService,
+        DataLabelService, TooltipService, AccumulationChartModule, PieSeriesService,
+        AccumulationDataLabelService, AccumulationLegendService,
+        AccumulationTooltipService} from '@syncfusion/ej2-angular-charts';
+
+
+
+
+
+
+
 
 @NgModule({
   declarations: [
     AppComponent,
     HomeComponent,
-    EmployeeTableComponent
+    EmployeeTableComponent,
+    LoginComponent,
+    ChartsComponent
   ],
   imports: [
     FormsModule,
@@ -26,9 +51,23 @@ import { EmployeeTableComponent } from './employeetable/employeetable.component'
     IgxRippleModule,
     IgxGridModule,
     IgxCheckboxModule,
-    IgxDatePickerModule
+    IgxDatePickerModule,
+    MatButtonModule,
+    MatIconModule,
+    MatFormFieldModule,
+    MatInputModule,
+    MatTooltipModule,
+    MatCommonModule,
+    MatCardModule,
+    MatSnackBarModule,
+    GridModule,
+    AccumulationChartModule,
+    ChartModule,
+    HttpClientModule
   ],
-  providers: [],
+  providers: [LineSeriesService, CategoryService,
+     LegendService, DataLabelService, TooltipService, PieSeriesService,
+     AccumulationDataLabelService, AccumulationLegendService, AccumulationTooltipService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

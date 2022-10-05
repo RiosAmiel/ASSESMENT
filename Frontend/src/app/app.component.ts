@@ -1,8 +1,11 @@
 import { Component, OnInit, ViewChild, ViewEncapsulation } from '@angular/core';
 import { NavigationStart, Router } from '@angular/router';
 import { IgxNavigationDrawerComponent } from 'igniteui-angular';
+import { Observable } from 'rxjs';
 import { filter } from 'rxjs/operators';
 import { routes } from './app-routing.module';
+import { LoginComponent } from './login/login.component';
+import { DataService } from './services/data.service';
 
 @Component({
   selector: 'app-root',
@@ -16,11 +19,12 @@ export class AppComponent implements OnInit {
     name: string
     icon: string
   }[] = [];
-
+  
   @ViewChild(IgxNavigationDrawerComponent, { static: true })
   public navdrawer!: IgxNavigationDrawerComponent;
 
-  constructor(private router: Router) {
+  constructor(
+    private router: Router) {
     for (const route of routes) {
       if (route.path && route.data && route.path.indexOf('*') === -1) {
         this.topNavLinks.push({
@@ -42,5 +46,8 @@ export class AppComponent implements OnInit {
           this.navdrawer.close();
         }
       });
+  }
+  logout(){
+    this.router.navigate(['']);
   }
 }

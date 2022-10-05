@@ -1,0 +1,32 @@
+
+<div class="charts">
+    <div class="line-chart">
+        <div align='center'>
+            <mat-card>
+                <ejs-chart style='display:block' align='center' id='chartcontainer' [title]='title' [primaryXAxis]='primaryXAxis' [primaryYAxis]='primaryYAxis'
+                    [tooltip]='tooltip' (load)='load($event)' [chartArea]='chartArea' [width]='width' [legendSettings]='legend'>
+                    <e-series-collection>
+                        <e-series [dataSource]='data' type='Line' xName='Period' yName='Viet_Growth' name='Vietnam' width=2 [marker]='circleMarker' opacity=1> </e-series>
+                        <e-series [dataSource]='data' type='Line' xName='Period' yName='Can_Growth' name='Canada' width=2 [marker]='triangleMarker' opacity=1> </e-series>
+                        <e-series [dataSource]='data' type='Line' xName='Period' yName='Mal_Growth' name='Malaysia' width=2 [marker]='diamondMarker' opacity=1> </e-series>
+                        <e-series [dataSource]='data' type='Line' xName='Period' yName='Egy_Growth' name='Egypt' width=2 [marker]='rectangleMarker' opacity=1> </e-series>
+                        <e-series [dataSource]='data' type='Line' xName='Period' yName='Ind_Growth' name='Indonesia' width=2 [marker]='pentagonMarker' opacity=1> </e-series>    
+                    </e-series-collection>
+                </ejs-chart>
+            </mat-card>
+        </div>
+    </div>
+    <div class="pie-chart">
+        <mat-card>
+            <ejs-accumulationchart [title]='title_V' [legendSettings]='legend' [tooltip]='tooltip'>
+                <e-accumulation-series-collection>
+                    <e-accumulation-series type='Pie' [dataSource]='data' xName='Period' yName='Viet_Growth' name='Vietnam' 
+                    [startAngle]="startAngle" [endAngle]="endAngle" innerRadius="40%"
+                    radius="70%" [dataLabel]='circleMarker' explode=true explodeOffset='10%' [explodeIndex]='0'>
+                        
+                    </e-accumulation-series>
+                </e-accumulation-series-collection>
+            </ejs-accumulationchart>
+        </mat-card>
+    </div>
+</div>
