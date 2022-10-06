@@ -2,6 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import { Cars } from '../charts/charts.component';
+import { Users } from '../login/login.component';
 
 
 @Injectable({
@@ -11,10 +13,22 @@ export class DataService {
   constructor(
     private http: HttpClient) { }
 
-    getPosts() {
-      return this.http.get(`${environment.apiURL}`);
+    private isLoggedIn: boolean = false;
+    getPosts(): Observable<Users[]> {
+      return this.http.get(`${environment.apiURL}`) as Observable<Users[]>;
     }
-    getUser(){
-      return this.http.get(`${environment.userURL}`);
+    getUser(id: number): Observable<Users[]>{
+      return this.http.get(`${environment.apiURL}/${id}`) as Observable<Users[]>;
+    }
+    getCars(): Observable<Cars[]>{
+      return this.http.get(`${environment.carsURL}`) as Observable<Cars[]>;
+    }
+
+    isUserLoggedIn(): boolean { 
+      return this.isLoggedIn 
+    }
+  
+    setUserLoggedIn(): void {
+      this.isLoggedIn = true;
     }
 }

@@ -5,7 +5,7 @@
 export const environment = {
   production: false,
   apiURL: 'https://633bde94f11701a65f69b553.mockapi.io/Users',
-  userURL: 'https://633bde94f11701a65f69b553.mockapi.io/Users/:id'
+  carsURL: 'https://633bde94f11701a65f69b553.mockapi.io/Cars'
 };
 
 /*

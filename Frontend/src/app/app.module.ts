@@ -19,6 +19,7 @@ import { HttpClient, HttpClientModule } from '@angular/common/http';
 import {MatSnackBarModule} from '@angular/material/snack-bar';
 import { ChartsComponent } from './charts/charts.component';
 import { GridModule } from '@syncfusion/ej2-angular-grids';
+import { ReactiveFormsModule } from '@angular/forms';
 import { ChartModule, LineSeriesService, CategoryService, LegendService,
         DataLabelService, TooltipService, AccumulationChartModule, PieSeriesService,
         AccumulationDataLabelService, AccumulationLegendService,
@@ -63,6 +64,7 @@ import { ChartModule, LineSeriesService, CategoryService, LegendService,
     GridModule,
     AccumulationChartModule,
     ChartModule,
+    ReactiveFormsModule,
     HttpClientModule
   ],
   providers: [LineSeriesService, CategoryService,

@@ -24,7 +24,7 @@ export class AppComponent implements OnInit {
   public navdrawer!: IgxNavigationDrawerComponent;
 
   constructor(
-    private router: Router) {
+    public router: Router) {
     for (const route of routes) {
       if (route.path && route.data && route.path.indexOf('*') === -1) {
         this.topNavLinks.push({
@@ -48,6 +48,8 @@ export class AppComponent implements OnInit {
       });
   }
   logout(){
-    this.router.navigate(['']);
+    this.router.navigate(['']).then(() => {
+      window.location.reload();
+    });
   }
 }

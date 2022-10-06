@@ -1,6 +1,5 @@
-
 <div class="outer-wrapper" igxLayout>
-  <igx-nav-drawer #nav id="project-menu" [isOpen]="false" [enableGestures]="true" width="280px">
+  <igx-nav-drawer  #nav id="project-menu" [isOpen]="false"  [enableGestures]="true" width="280px">
     <ng-template igxDrawer>
       <span igxDrawerItem [isHeader]="true">Views</span>
       <span *ngFor="let route of topNavLinks" igxDrawerItem igxRipple routerLinkActive="igx-nav-drawer__item--active" 
@@ -8,7 +7,7 @@
     </ng-template>
   </igx-nav-drawer>
   <div igxFlex igxLayout igxLayoutDir="columns">
-    <igx-navbar  title="Frontend" actionButtonIcon="menu" (action)="nav.toggle()">
+    <igx-navbar  title="Frontend" actionButtonIcon="menu" (action)="nav.toggle()" *ngIf="router.url != '/login'">
     <button mat-mini-fab 
     #tooltip="matTooltip"
     matTooltip="Logout" (click)="logout()">

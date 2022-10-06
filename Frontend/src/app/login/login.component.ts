@@ -3,7 +3,16 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 import { DataService } from '../../app/services/data.service';
 import * as _ from "lodash";
 import { Router } from '@angular/router';
-import { BehaviorSubject } from 'rxjs';
+import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+
+export interface Users {
+  createdAt: string
+  name: string
+  avatar: string
+  password: string
+  email: string
+  id: string
+}
 
 @Component({
   selector: 'app-login',
@@ -11,45 +20,49 @@ import { BehaviorSubject } from 'rxjs';
   styleUrls: ['./login.component.scss']
 })
 export class LoginComponent implements OnInit {
-
+  form!: FormGroup;
   constructor(
     private ds: DataService,
     private snack: MatSnackBar,
-    private route: Router
-  ) { }
+    private route: Router,
+    private readonly fb: FormBuilder
+  ) {this.form = this.fb.group({
+    email: new FormControl('', [Validators.required, Validators.email]),
+    password: new FormControl('', [Validators.required])
+  }); }
 
-  userInfo:any={}
-  userEmail!: String;
-  userPw!: String;
-
+  users: Users[] = [];
+  filtUsers: Users[] = [];
+  name!: string;
   ngOnInit(): void {
     this.PullUsers();
   }
 
 
-  PullUsers(){
-    this.ds.getPosts().subscribe((data:any) =>{ 
-      console.log(_.filter(data, (item:any) => item.id == '1'));
-      console.log(data);
+  PullUsers(): void {
+    this.ds.getPosts().subscribe((data:Users[]) =>{ 
+      this.filtUsers = data;
+      console.log(this.filtUsers);
     });
   }
   
-  LoginUser(){
-    if (this.userEmail == null || this.userPw == null){
-      this.snack.open("Please enter required credentials", 'close', {duration:1000});
-    }
-    else{
-      this.ds.getPosts().subscribe((data:any)=>{
-        if ( _.filter(data, (item:any) => item.email == this.userEmail && item.password == this.userPw )) {
+  LoginUser(): void{
+    try {
+    const { email, password } = this.form.value;
+    this.users = _.filter(this.filtUsers, {"email": email, "password": password});
+    console.log(this.users);
+      if(_.size(this.users) ){
+        this.snack.open("welcome ", 'X', {duration:2000});
         this.route.navigate(['home']);
-        this.snack.open("Welcome",'close', {duration: 1000});
       }
       else {
-        this.snack.open("Incorrect account",'close', {duration: 1000});
-
+        this.snack.open("Please Enter required Credentials", 'X', {duration:2000});
       }
-    });
     }
+
+    catch (e:any) {
+      console.error(e.message)
+    } 
     
-  }
+  } 
 }
