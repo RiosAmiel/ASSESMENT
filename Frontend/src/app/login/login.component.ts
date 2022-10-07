@@ -28,7 +28,7 @@ export class LoginComponent implements OnInit {
     private readonly fb: FormBuilder
   ) {this.form = this.fb.group({
     email: new FormControl('', [Validators.required, Validators.email]),
-    password: new FormControl('', [Validators.required])
+    password: new FormControl('', [Validators.required, Validators.minLength(8)])
   }); }
 
   users: Users[] = [];
@@ -55,7 +55,7 @@ export class LoginComponent implements OnInit {
         this.route.navigate(['home']);
       }
       else {
-        this.snack.open("Password or Email is incorrect", 'X', {duration:2000});
+        this.snack.open("Email or Password is incorrect", 'X', {duration:2000});
       }
     }
     catch (e:any) {
