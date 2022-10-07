@@ -1,7 +1,7 @@
 <div class="grid">
   <igx-grid #grid1 
   [data]="localData" 
-  primaryKey="EmployeeID" 
+  primaryKey="id" 
   [allowFiltering]="true" 
   [allowFiltering]="true" 
   [rowEditable]="true" 
@@ -9,7 +9,7 @@
   columnSelection="multiple" 
   [moving]="true">
     <igx-column 
-    field="EmployeeID" 
+    field="id" 
     header="ID"  
     width="100px" 
     [sortable]="true" 
@@ -19,9 +19,9 @@
     [pinned]="true">
     </igx-column>
     <igx-column 
-    field="FirstName" 
-    header="First Name"  
-    width="150px" 
+    field="name" 
+    header="Full Name"  
+    width="200px" 
     [sortable]="true" 
     [filterable]="true" 
     [editable]="true" 
@@ -29,18 +29,9 @@
     [pinned]="true">
     </igx-column>
     <igx-column 
-    field="LastName" 
-    header="Last Name"
-    width="150px" 
-    [sortable]="true" 
-    [filterable]="true" 
-    [editable]="true" 
-    [resizable]="true"
-    [pinned]="true">
-    </igx-column>
-    <igx-column 
-    field="Country" 
-    width="140px" 
+    field="job" 
+    header="Job Area"
+    width="200px" 
     [sortable]="true" 
     [filterable]="true" 
     [editable]="true" 
@@ -48,27 +39,13 @@
     [groupable]="true">
     </igx-column>
     <igx-column 
-    field="Age" 
-    width="110px" 
-    dataType="number" 
-    [sortable]="true" 
-    [filterable]="true" 
-    [editable]="true" 
-    [resizable]="true" 
-    [groupable]="true">
-    </igx-column>
-    <igx-column 
-    field="RegistererDate" 
-    header="Registerer Date" 
-    width="180px" 
-    dataType="date" 
+    field="email" 
+    header="Email" 
+    width="200px" 
     [sortable]="true" 
     [filterable]="true" 
     [editable]="true" 
     [resizable]="true">
-      <ng-template igxCell let-value>
-          {{ value | date }}
-      </ng-template>
     </igx-column>
       <igx-column 
       field="IsActive" 
@@ -97,9 +74,8 @@
               <igx-icon *ngIf="searchText.length === 0">search</igx-icon>
               <igx-icon *ngIf="searchText.length > 0" (click)="clearSearch()">clear</igx-icon>
           </igx-prefix>
-
-          <input #search1 id="search1" igxInput placeholder="Search" [(ngModel)]="searchText" (ngModelChange)="grid.findNext(searchText, caseSensitive, exactMatch)"
-              (keydown)="searchKeyDown($event)" />
+          <input #search1 id="search1" igxInput placeholder="Search by Name" type="text" (ngModelChange)="grid.findNext(searchText, caseSensitive, exactMatch)"
+              (input)="filter($event)" />
 
           <igx-suffix *ngIf="searchText.length > 0">
               <div class="resultsText" *ngIf="grid.lastSearchInfo">
@@ -110,16 +86,6 @@
                   <span *ngIf="grid.lastSearchInfo.matchInfoCache.length === 0">
                       No results
                   </span>
-              </div>
-              <div class="chips">
-                  <igx-chips-area>
-                      <igx-chip (click)="updateSearch()" [color]="caseSensitive? 'lightgrey' : 'rgba(0, 0, 0, .04)'">
-                          <span>Case Sensitive</span>
-                      </igx-chip>
-                      <igx-chip (click)="updateExactSearch()" [color]="exactMatch? 'lightgrey' : 'rgba(0, 0, 0, .04)'">
-                          <span>Exact Match</span>
-                      </igx-chip>
-                  </igx-chips-area>
               </div>
               <div class="searchButtons">
                   <button igxButton="icon" igxRipple (click)="grid.findPrev(searchText, caseSensitive, exactMatch)">

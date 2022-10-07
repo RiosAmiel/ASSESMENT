@@ -1,6 +1,8 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { IgxGridComponent } from 'igniteui-angular';
-import { Employee, employeesData } from './localData';
+import { IgxGridComponent, IgxStringFilteringOperand } from 'igniteui-angular';
+import { Users } from '../Models/models';
+import { DataService } from '../services/data.service';
+
 
 @Component({
   selector: 'app-employeetable',
@@ -8,40 +10,46 @@ import { Employee, employeesData } from './localData';
   styleUrls: ['./employeetable.component.scss']
 })
 export class EmployeeTableComponent implements OnInit {
-  public localData: Employee[] = [];
+  public localData: Users[] = [];
   title = 'EmployeeTable';
   @ViewChild('grid1', { static: true })
   public grid!: IgxGridComponent;
   public searchText = '';
   public caseSensitive = false;
   public exactMatch = false;
-  
+
+  constructor (
+    private ds: DataService,
+  ) {}
+
   ngOnInit(): void {
-    this.localData = employeesData;
+    this.PullUsers();
   }
 
+  PullUsers(): void {
+    this.ds.getPosts().subscribe((data:Users[]) =>{ 
+      this.localData = data;
+    });
+  }
   public clearSearch() {
     this.searchText = '';
     this.grid.clearSearch();
 }
 
-public searchKeyDown(ev:any) {
-    if (ev.key === 'Enter' || ev.key === 'ArrowDown' || ev.key === 'ArrowRight') {
-        ev.preventDefault();
-        this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
-    } else if (ev.key === 'ArrowUp' || ev.key === 'ArrowLeft') {
-        ev.preventDefault();
-        this.grid.findPrev(this.searchText, this.caseSensitive, this.exactMatch);
-    }
+public filter(event: Event): void {
+  const { target } = event;
+  this.grid.filter('name', (event.target as HTMLInputElement).value, IgxStringFilteringOperand.instance().condition('contains'), true);
+  this.grid.markForCheck;
 }
 
-public updateSearch() {
+public updateSearch(): void {
     this.caseSensitive = !this.caseSensitive;
     this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
 }
+public updateExactSearch(): void {
+  this.exactMatch = !this.exactMatch;
+  this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
 
-public updateExactSearch() {
-    this.exactMatch = !this.exactMatch;
-    this.grid.findNext(this.searchText, this.caseSensitive, this.exactMatch);
 }
 }
+ 

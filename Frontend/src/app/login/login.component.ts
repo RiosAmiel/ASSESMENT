@@ -4,15 +4,8 @@ import { DataService } from '../../app/services/data.service';
 import * as _ from "lodash";
 import { Router } from '@angular/router';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
+import { Users } from '../Models/models';
 
-export interface Users {
-  createdAt: string
-  name: string
-  avatar: string
-  password: string
-  email: string
-  id: string
-}
 
 @Component({
   selector: 'app-login',

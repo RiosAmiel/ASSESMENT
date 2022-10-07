@@ -2,8 +2,8 @@ import { HttpClient } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { BehaviorSubject, Observable } from 'rxjs';
 import { environment } from 'src/environments/environment';
-import { Cars } from '../charts/charts.component';
-import { Users } from '../login/login.component';
+import { Cars } from '../Models/models';
+import { Users } from '../Models/models';
 
 
 @Injectable({

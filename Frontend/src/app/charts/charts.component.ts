@@ -3,14 +3,9 @@ import { IAccLoadedEventArgs, ChartTheme,  } from '@syncfusion/ej2-angular-chart
 import { Browser } from '@syncfusion/ej2-base';
 import { DataService } from '../services/data.service';
 import * as _ from "lodash";
-import { parse } from 'path';
+import { Cars } from '../Models/models';
 
-export interface Cars {
-  createdAt: string
-  car: string
-  price: number
-  id: string
-}
+
 
 @Component({
   selector: 'app-charts',
@@ -18,13 +13,14 @@ export interface Cars {
   styleUrls: ['./charts.component.scss']
 })
 export class ChartsComponent implements OnInit { 
-public tooltip: Object = {
-    enable: true
-};
+  public tooltip: Object = {
+    enable: true,
+    header: '',
+    format: '<b>${point.x}</b><br>Browser Share: <b>${point.y}%</b>'
+ };
 
 public legend: Object = {
     visible: true,
-    enableHighlight : true
 }
 // custom code start
 public load(args: IAccLoadedEventArgs): void {
@@ -33,10 +29,20 @@ public load(args: IAccLoadedEventArgs): void {
     args.chart.theme = <ChartTheme>(selectedTheme.charAt(0).toUpperCase() + selectedTheme.slice(1)).replace(/-dark/i, "Dark");
 };
 // custom code end
-public circleMarker: Object = { visible: true, height: 7, width: 7 , shape: 'Circle' , isFilled: true };
-public startAngle: number = 0;
+public dataLabel: Object = {
+  visible: true,
+  name: 'stocks',
+  position: 'Outside',
+  font: {
+      fontWeight: '600',
+  },
+  connectorStyle: { 
+      length: '20px',
+      type: 'Curve'
+   }
+};public startAngle: number = 0;
 public endAngle: number = 360;
-public title_V: string = 'Car Prices';
+public title_V: string = 'Car Stocks';
 
 
   constructor(
@@ -47,12 +53,12 @@ public title_V: string = 'Car Prices';
     this.PullCars();
   }
   priceP!: number;
-  CarsInfo: Object[] = []
+  Cars: Cars[] = []
   PullCars(){
     this.ds.getCars().subscribe((data:Cars[]) =>{ 
-        for (let i = 0; i < data[i].price; i++) {
-            this.priceP = data[i].price = parseFloat(data[i].price!.toString());
-            this.CarsInfo = data;
+        for (let i in data) {
+            this.priceP = data[i].stocks = parseFloat(data[i].stocks!.toString());
+            this.Cars = data;
         }
       });
   }
