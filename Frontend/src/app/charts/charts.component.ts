@@ -3,11 +3,12 @@ import { IAccLoadedEventArgs, ChartTheme,  } from '@syncfusion/ej2-angular-chart
 import { Browser } from '@syncfusion/ej2-base';
 import { DataService } from '../services/data.service';
 import * as _ from "lodash";
+import { parse } from 'path';
 
 export interface Cars {
   createdAt: string
   car: string
-  price: string
+  price: number
   id: string
 }
 
@@ -45,13 +46,14 @@ public title_V: string = 'Car Prices';
   ngOnInit(): void {
     this.PullCars();
   }
-
+  priceP!: number;
   CarsInfo: Object[] = []
   PullCars(){
     this.ds.getCars().subscribe((data:Cars[]) =>{ 
-        const filCars = _.filter(data, (item:Cars) => item.id);
-        this.CarsInfo = data;
-        console.log(this.CarsInfo);
+        for (let i = 0; i < data[i].price; i++) {
+            this.priceP = data[i].price = parseFloat(data[i].price!.toString());
+            this.CarsInfo = data;
+        }
       });
   }
 }

@@ -35,7 +35,6 @@ export class LoginComponent implements OnInit {
   filtUsers: Users[] = [];
   name!: string;
   ngOnInit(): void {
-    this.PullUsers();
   }
 
 
@@ -56,10 +55,9 @@ export class LoginComponent implements OnInit {
         this.route.navigate(['home']);
       }
       else {
-        this.snack.open("Please Enter required Credentials", 'X', {duration:2000});
+        this.snack.open("Password or Email is incorrect", 'X', {duration:2000});
       }
     }
-
     catch (e:any) {
       console.error(e.message)
     } 
