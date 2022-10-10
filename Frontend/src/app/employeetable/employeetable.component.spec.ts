@@ -1,3 +1,4 @@
+import { HttpClientTestingModule } from '@angular/common/http/testing';
 import { ComponentFixture, TestBed, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
@@ -11,7 +12,9 @@ describe('EmployeeTableComponent', () => {
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
       declarations: [EmployeeTableComponent],
-      imports: [FormsModule, BrowserAnimationsModule, IgxGridModule, IgxDatePickerModule, IgxCheckboxModule]
+      imports: [FormsModule, BrowserAnimationsModule, IgxGridModule,
+         IgxDatePickerModule, IgxCheckboxModule, HttpClientTestingModule ]
+      
     })
     .compileComponents();
   }));

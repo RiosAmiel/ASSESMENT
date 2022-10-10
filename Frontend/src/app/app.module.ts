@@ -24,6 +24,8 @@ import { ChartModule, LineSeriesService, CategoryService, LegendService,
         DataLabelService, TooltipService, AccumulationChartModule, PieSeriesService,
         AccumulationDataLabelService, AccumulationLegendService,
         AccumulationTooltipService} from '@syncfusion/ej2-angular-charts';
+import { OverlayModule } from '@angular/cdk/overlay';
+import { CommonModule } from '@angular/common';
 
 
 
@@ -65,7 +67,9 @@ import { ChartModule, LineSeriesService, CategoryService, LegendService,
     AccumulationChartModule,
     ChartModule,
     ReactiveFormsModule,
-    HttpClientModule
+    OverlayModule,
+    HttpClientModule,
+    CommonModule
   ],
   providers: [LineSeriesService, CategoryService,
      LegendService, DataLabelService, TooltipService, PieSeriesService,
