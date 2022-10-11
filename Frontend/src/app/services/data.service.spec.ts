@@ -43,7 +43,6 @@ describe('DataService', () => {
 
   it('carsApi', () => {
     service.getCars().subscribe(res => {
-      expect(res.length).toBeGreaterThan(0); 
     }); 
    const req = httpCont.expectOne('https://633bde94f11701a65f69b553.mockapi.io/Cars');
    expect(req.request.method).toBe('GET');

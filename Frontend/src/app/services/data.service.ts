@@ -13,7 +13,6 @@ export class DataService {
   constructor(
     private http: HttpClient) { }
 
-    private isLoggedIn: boolean = false;
     getPosts(): Observable<Users[]> {
       return this.http.get(`${environment.apiURL}`) as Observable<Users[]>;
     }
