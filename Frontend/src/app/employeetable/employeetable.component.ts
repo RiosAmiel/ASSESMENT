@@ -31,14 +31,14 @@ export class EmployeeTableComponent implements OnInit {
       this.localData = data;
     });
   }
-  public clearSearch() {
+  public clearSearch(): void {
     this.searchText = '';
     this.grid.clearSearch();
 }
 
 public filter(event: Event): void {
   const { target } = event;
-  this.grid.filter('name', (event.target as HTMLInputElement).value, IgxStringFilteringOperand.instance().condition('contains'), true);
+  this.grid.filter('name', (target as HTMLInputElement).value, IgxStringFilteringOperand.instance().condition('contains'), true);
   this.grid.markForCheck;
 }
 

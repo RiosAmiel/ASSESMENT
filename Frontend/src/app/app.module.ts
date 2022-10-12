@@ -26,6 +26,7 @@ import { ChartModule, LineSeriesService, CategoryService, LegendService,
         AccumulationTooltipService} from '@syncfusion/ej2-angular-charts';
 import { OverlayModule } from '@angular/cdk/overlay';
 import { CommonModule } from '@angular/common';
+import { GlobalErrorHandlerService } from './error-routing/error/global-error-handler.service';
 
 
 
@@ -73,7 +74,8 @@ import { CommonModule } from '@angular/common';
   ],
   providers: [LineSeriesService, CategoryService,
      LegendService, DataLabelService, TooltipService, PieSeriesService,
-     AccumulationDataLabelService, AccumulationLegendService, AccumulationTooltipService],
+     AccumulationDataLabelService, AccumulationLegendService, AccumulationTooltipService,
+     GlobalErrorHandlerService],
   bootstrap: [AppComponent]
 })
 export class AppModule {

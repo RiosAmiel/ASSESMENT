@@ -47,9 +47,9 @@ export class AppComponent implements OnInit {
         }
       });
   }
+
   logout(){
-    this.router.navigate(['']).then(() => {
-      window.location.reload();
-    });
+    this.router.navigate(['']);
+    
   }
 }
