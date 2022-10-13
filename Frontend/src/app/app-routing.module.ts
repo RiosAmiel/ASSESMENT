@@ -10,7 +10,7 @@ import { LoginComponent } from './login/login.component';
 import { ChartsComponent } from './charts/charts.component';
 
 export const routes: Routes = [
-  { path: '', redirectTo: '/login', pathMatch: 'full' },
+  { path: '', redirectTo: 'login', pathMatch: 'full' },
   { path: 'home', component: HomeComponent, data: { text: 'Home', icon: 'home' } },
   { path: 'error', component: UncaughtErrorComponent },
   { path: 'employeetable', component: EmployeeTableComponent, data: { text: 'EmployeeTable', icon: 'table_view' } },

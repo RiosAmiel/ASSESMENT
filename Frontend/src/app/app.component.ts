@@ -37,6 +37,10 @@ export class AppComponent implements OnInit {
   }
 
   public ngOnInit(): void {
+    this.routerEvent();
+  }
+
+  private routerEvent() {
     this.router.events.pipe(
       filter((x): x is NavigationStart => x instanceof NavigationStart)
     )

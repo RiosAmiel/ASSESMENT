@@ -49,11 +49,15 @@ public title_V: string = 'Car Stocks';
   priceP!: number;
   Cars: Cars[] = []
   PullCars(){
-    this.ds.getCars().subscribe((data:Cars[]) =>{ 
-        for (let i in data) {
-            this.priceP = data[i].stocks = parseFloat(data[i].stocks!.toString());
-            this.Cars = data;
-        }
+    this.ds.getCars().subscribe((data:Cars[]) =>{  
+      this.Cars = data;
+        this.parseFloat();
       });
+  }
+
+  parseFloat() {
+    for (let i in this.Cars) {
+      this.priceP = this.Cars[i].stocks = parseFloat(this.Cars[i].stocks!.toString());
+    }
   }
 }

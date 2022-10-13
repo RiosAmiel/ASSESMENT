@@ -6,6 +6,8 @@ import { AppComponent } from './app.component';
 describe('AppComponent', () => {
 
   let router: Router;
+  let fixture: ComponentFixture<AppComponent>;
+  let component: AppComponent;
 
   beforeEach(waitForAsync(() => {
     TestBed.configureTestingModule({
@@ -20,10 +22,15 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
+      providers: [
+
+      ]
     }).compileComponents();
     
     router = TestBed.inject(Router);
-
+    fixture = TestBed.createComponent(AppComponent);
+    component = fixture.componentInstance;
+    component.ngOnInit();
   }));
   it('should create the app', waitForAsync(() => {
     const fixture = TestBed.createComponent(AppComponent);
@@ -38,4 +45,5 @@ describe('AppComponent', () => {
     component.logout();
     expect(navigateSpy).toHaveBeenCalledWith(['']);
   });
+
 });

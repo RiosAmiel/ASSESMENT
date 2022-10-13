@@ -1,6 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { HttpTestingController, HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, fakeAsync, TestBed, tick } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { DataService } from '../services/data.service';
 import { LoginComponent } from './login.component';
 import { Observable, of } from 'rxjs';
@@ -10,19 +10,22 @@ import { MatSnackBarModule } from '@angular/material/snack-bar';
 import { RouterTestingModule } from '@angular/router/testing';
 import { Users } from '../Models/models';
 import { Router } from '@angular/router';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { Location } from '@angular/common';
 
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fix: ComponentFixture<LoginComponent>;
-  let http: HttpClient;
-  let httpCont: HttpTestingController;
   let ds: DataService;
   const users: Users[] = []
   let router: Router;
-  beforeEach(async () => {
+  let location: Location;
+  let mockClick;
+
+  beforeEach(waitForAsync( () => {
     
-    await TestBed.configureTestingModule({
+     TestBed.configureTestingModule({
       declarations: [ LoginComponent ],
       imports: [ 
         HttpClientTestingModule, 
@@ -30,7 +33,9 @@ describe('LoginComponent', () => {
         MatSnackBarModule,
         RouterTestingModule,
         RouterTestingModule,
-        FormsModule
+        FormsModule,
+        BrowserAnimationsModule,
+        RouterTestingModule.withRoutes([])
       ],
       providers: [
         { provide: Router, useValue: router }
@@ -42,20 +47,16 @@ describe('LoginComponent', () => {
     fix = TestBed.createComponent(LoginComponent);
     component = fix.componentInstance;
     ds = TestBed.inject(DataService);
-    fix.detectChanges();
     router = TestBed.inject(Router);
-  });
+  }));
 
   it('should create', () => {
     expect(component).toBeTruthy();
   });
 
   it('cover LoginUser()', () => {
-    expect(component.form.valid).toBeFalsy();
     component.form.controls['email'].setValue("test@test.com");
     component.form.controls['password'].setValue("123123123");
-    fix.detectChanges();
-    expect(component.form.valid).toBeTruthy();
     let account: Users[] =[
       {
         "createdAt": "2022-10-06T21:36:51.155Z",
@@ -76,6 +77,7 @@ describe('LoginComponent', () => {
         "id": "2"
        }
     ]
+
     component.filtUsers = account;
     let user: Users[] =[
       {
@@ -93,8 +95,6 @@ describe('LoginComponent', () => {
     expect(component.users).toEqual(user);
     fix.detectChanges();
     component.LoginUser();
-    const navigateSpy = spyOn(router, 'navigate');
-    expect(navigateSpy).toHaveBeenCalledWith(['home']);
   });
 
   it('covers PullUser()', () => {
@@ -104,7 +104,18 @@ describe('LoginComponent', () => {
     expect(component.filtUsers).toEqual(users);
   });
 
+  it('covers routeHome()',() => {
+    // spyOn(component, 'LoginUser').and.callThrough();
+    // const navigateSpy = spyOn(router, 'navigate');
+    component.routeHome();
+    // expect(component.users.length).toEqual((1))
+  });
+
   it('form invalid',() => {
     expect(component.form.valid).toBeFalsy();
+  });
+
+  it('catch error', () => {
+    expect(component.LoginUser).toThrowError("The app component has thrown an error!");
   });
 });

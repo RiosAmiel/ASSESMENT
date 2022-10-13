@@ -17,7 +17,7 @@ export class LoginComponent implements OnInit {
   constructor(
     private ds: DataService,
     private snack: MatSnackBar,
-    private route: Router,
+    private router: Router,
     private readonly fb: FormBuilder
   ) {this.form = this.fb.group({
     email: new FormControl('', [Validators.required, Validators.email]),
@@ -44,16 +44,22 @@ export class LoginComponent implements OnInit {
     this.users = _.filter(this.filtUsers, {"email": email, "password": password});
     console.log(this.users);
       if(_.size(this.users) ){
-        this.snack.open("welcome ", 'X', {duration:2000});
-        this.route.navigate(['home']);
+        this.routeHome();
       }
       else {
         this.snack.open("Email or Password is incorrect", 'X', {duration:2000});
       }
     }
     catch (e:any) {
-      console.error(e.message)
+      throw Error("The app component has thrown an error!");
     } 
     
   } 
+
+
+  routeHome() {
+    this.router.navigate(['home']);
+    this.snack.open("welcome ", 'X', { duration: 2000 });
+    
+  }
 }

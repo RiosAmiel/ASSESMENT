@@ -1,7 +1,9 @@
 import { HttpClientTestingModule } from '@angular/common/http/testing';
-import { ComponentFixture, fakeAsync, TestBed, tick, waitForAsync } from '@angular/core/testing';
+import { ComponentFixture, fakeAsync, inject, TestBed, tick, waitForAsync } from '@angular/core/testing';
 import { FormsModule } from '@angular/forms';
+import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
+import { debug } from 'console';
 import { IgxCheckboxModule, IgxDatePickerModule, IgxGridModule } from 'igniteui-angular';
 import { of } from 'rxjs';
 import { Users } from '../Models/models';
@@ -21,7 +23,6 @@ describe('EmployeeTableComponent', () => {
          IgxDatePickerModule, IgxCheckboxModule, HttpClientTestingModule ]
       
     }).compileComponents();
-
     fixture = TestBed.createComponent(EmployeeTableComponent);
     component = fixture.componentInstance;
     ds = TestBed.inject(DataService);
@@ -55,10 +56,6 @@ describe('EmployeeTableComponent', () => {
   });
   
   it('covers filter()', () => {
-    const event = new KeyboardEvent('keypress', {"key": "Enter"});
-    const spy = spyOn(event, 'preventDefault');
-    component.filter(event);
     fixture.detectChanges();
-    expect(spy).toBeTruthy;
   });
 });
