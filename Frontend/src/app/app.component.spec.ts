@@ -22,9 +22,6 @@ describe('AppComponent', () => {
       declarations: [
         AppComponent
       ],
-      providers: [
-
-      ]
     }).compileComponents();
     
     router = TestBed.inject(Router);

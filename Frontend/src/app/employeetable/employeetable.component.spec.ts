@@ -54,8 +54,4 @@ describe('EmployeeTableComponent', () => {
     component.updateExactSearch();
     expect(component.exactMatch).toBe(true);
   });
-  
-  it('covers filter()', () => {
-    fixture.detectChanges();
-  });
 });

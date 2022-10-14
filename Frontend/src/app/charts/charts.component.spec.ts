@@ -40,7 +40,22 @@ describe('ChartsComponent', () => {
     
   });
   it('covers parseFloat()', () => {
-    component.priceP;
+    let vehics: Cars[] = [
+      {
+        "createdAt": "2022-10-06T13:34:55.032Z",
+        "car": "Jaguar Civic",
+        "stocks": 516.00,
+        "id": "1"
+       },
+       {
+        "createdAt": "2022-10-06T12:01:46.253Z",
+        "car": "Hyundai Volt",
+        "stocks": 150.00,
+        "id": "2"
+       }
+    ];
+    component.Cars = vehics;
+    component.parseFloat();
     let vehic: Cars[] = [
       {
         "createdAt": "2022-10-06T13:34:55.032Z",
@@ -54,6 +69,7 @@ describe('ChartsComponent', () => {
         "stocks": 150.00,
         "id": "2"
        }
-    ]
+    ];
+    expect(component.Cars).toEqual(vehic)
   });
 });

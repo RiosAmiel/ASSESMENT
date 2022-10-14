@@ -37,29 +37,24 @@ export class LoginComponent implements OnInit {
       console.log(this.filtUsers);
     });
   }
-  
+  sample:any;
   LoginUser(): void{
     try {
     const { email, password } = this.form.value;
     this.users = _.filter(this.filtUsers, {"email": email, "password": password});
-    console.log(this.users);
-      if(_.size(this.users) ){
-        this.routeHome();
-      }
-      else {
-        this.snack.open("Email or Password is incorrect", 'X', {duration:2000});
-      }
+    this.redirect(this.users.length);
     }
     catch (e:any) {
       throw Error("The app component has thrown an error!");
     } 
-    
-  } 
+}
 
-
-  routeHome() {
+  routeHome(): void {
     this.router.navigate(['home']);
-    this.snack.open("welcome ", 'X', { duration: 2000 });
     
+  }
+
+  redirect(varlenght: number) {
+    varlenght >= 1 ? this.routeHome(): this.snack.open("Email or Password is incorrect", 'X', {duration:2000}); 
   }
 }
