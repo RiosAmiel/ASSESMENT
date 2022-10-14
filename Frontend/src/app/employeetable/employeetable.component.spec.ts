@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { By } from '@angular/platform-browser';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { debug } from 'console';
-import { IgxCheckboxModule, IgxDatePickerModule, IgxGridModule } from 'igniteui-angular';
+import { IgxCheckboxModule, IgxDatePickerModule, IgxGridModule, IgxStringFilteringOperand } from 'igniteui-angular';
 import { of } from 'rxjs';
 import { Users } from '../Models/models';
 import { DataService } from '../services/data.service';
@@ -47,11 +47,19 @@ describe('EmployeeTableComponent', () => {
 
   it('covers updateSearch()', () => {
     component.updateSearch();
-    expect(component.caseSensitive).toBe(true);
+    expect(component.caseSensitive).toBeTruthy();
   });
 
   it('covers updateExactSearch()', () => {
     component.updateExactSearch();
-    expect(component.exactMatch).toBe(true);
+    expect(component.exactMatch).toBeTruthy();
+  });
+
+  it('covers filter()', () => {
+    const search = fixture.debugElement.query(By.css('#search1'));
+    search.nativeElement.value = 'franklin';
+    const event = search.nativeElement.dispatchEvent(new Event('input'));
+    expect(component.filter).toBeTruthy();
+    expect(search.nativeElement.value).toContain('franklin');
   });
 });

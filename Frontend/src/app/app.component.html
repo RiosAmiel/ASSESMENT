@@ -10,7 +10,7 @@
     <igx-navbar  title="Frontend" actionButtonIcon="menu" (action)="nav.toggle()" *ngIf="router.url != '/login'">
     <button mat-mini-fab 
     #tooltip="matTooltip"
-    matTooltip="Logout" (click)="logout()">
+    matTooltip="Logout" routerLink="/login">
       <mat-icon>logout</mat-icon>
     </button></igx-navbar>
     <div class="content" igxFlex>

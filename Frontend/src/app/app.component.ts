@@ -40,7 +40,7 @@ export class AppComponent implements OnInit {
     this.routerEvent();
   }
 
-  private routerEvent() {
+   routerEvent() {
     this.router.events.pipe(
       filter((x): x is NavigationStart => x instanceof NavigationStart)
     )
@@ -52,8 +52,4 @@ export class AppComponent implements OnInit {
       });
   }
 
-  logout(){
-    this.router.navigate(['']);
-    
-  }
 }
