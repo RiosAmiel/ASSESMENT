@@ -37,7 +37,6 @@ export class LoginComponent implements OnInit {
       console.log(this.filtUsers);
     });
   }
-  sample:any;
   LoginUser(): void{
     try {
     const { email, password } = this.form.value;
@@ -55,6 +54,6 @@ export class LoginComponent implements OnInit {
   }
 
   redirect(varlenght: number) {
-    varlenght >= 1 ? this.routeHome(): this.snack.open("Email or Password is incorrect", 'X', {duration:2000}); 
+    varlenght == 1 ? this.routeHome(): this.snack.open("Email or Password is incorrect", 'X', {duration:2000}); 
   }
 }

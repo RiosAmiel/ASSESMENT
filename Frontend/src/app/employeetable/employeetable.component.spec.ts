@@ -58,7 +58,7 @@ describe('EmployeeTableComponent', () => {
   it('covers filter()', () => {
     const search = fixture.debugElement.query(By.css('#search1'));
     search.nativeElement.value = 'franklin';
-    const event = search.nativeElement.dispatchEvent(new Event('input'));
+    search.nativeElement.dispatchEvent(new Event('input'));
     expect(component.filter).toBeTruthy();
     expect(search.nativeElement.value).toContain('franklin');
   });

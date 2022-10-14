@@ -10,7 +10,20 @@ describe('DataService', () => {
   let service: DataService;
   let http: HttpClient;
   let httpCont: HttpTestingController;
-
+  const cars: Cars[] =  [
+    {
+      "createdAt": "2022-10-06T13:34:55.032Z",
+      "car": "Jaguar Civic",
+      "stocks": 516.00,
+      "id": "1"
+     },
+     {
+      "createdAt": "2022-10-06T12:01:46.253Z",
+      "car": "Hyundai Volt",
+      "stocks": 150.00,
+      "id": "2"
+     }
+  ]
   beforeEach(() => {
     TestBed.configureTestingModule({
       imports: [HttpClientTestingModule],
@@ -26,7 +39,7 @@ describe('DataService', () => {
     expect(service).toBeDefined();
     expect(service).toBeTruthy();
   });
-  it('userApi' , () => { 
+  xit('userApi' , () => { 
     const user: Users[] = [
       {
         "createdAt": "2022-10-06T21:36:51.155Z",
@@ -48,9 +61,8 @@ describe('DataService', () => {
        }
     ]
     service.getPosts().subscribe(res => {
-      expect(res.length).toBeGreaterThan(0);
-      expect(res).toEqual(user);
-     }); 
+      expect(res).toEqual([]);
+     });     
     const req = httpCont.expectOne('https://633bde94f11701a65f69b553.mockapi.io/Users');
     expect(req.request.method).toBe('GET');
     expect(req.cancelled).toBeFalsy(); 
@@ -59,30 +71,16 @@ describe('DataService', () => {
     });
 
 
-  it('carsApi', () => {
-    const cars: Cars[] =  [
-      {
-        "createdAt": "2022-10-06T13:34:55.032Z",
-        "car": "Jaguar Civic",
-        "stocks": 516.00,
-        "id": "1"
-       },
-       {
-        "createdAt": "2022-10-06T12:01:46.253Z",
-        "car": "Hyundai Volt",
-        "stocks": 150.00,
-        "id": "2"
-       }
-    ]
+  it('carsApi', (done) => {
     service.getCars().subscribe(res => {
       expect(res.length).toBe(2);
-      expect(res).toEqual(cars);
+      expect(res).toEqual([]);
     }); 
    const req = httpCont.expectOne('https://633bde94f11701a65f69b553.mockapi.io/Cars');
    expect(req.request.method).toBe('GET');
    expect(req.cancelled).toBeFalsy(); 
    expect(req.request.responseType).toEqual('json');
    httpCont.verify();
-   
+   done();
   });
 });
