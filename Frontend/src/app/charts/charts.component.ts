@@ -45,16 +45,22 @@ public title_V: string = 'Car Stocks';
 
   ngOnInit(): void {
     this.PullCars();
+    this.PullCarsCore();
   }
   priceP!: number;
   Cars: Cars[] = []
   PullCars(){
     this.ds.getCars().subscribe((data:Cars[]) =>{  
-      this.Cars = data;
         this.parseFloat();
       });
   }
-
+  PullCarsCore(){
+    this.ds.getCarsCore().subscribe((data:Cars[]) =>{  
+      this.Cars = data;
+      this.parseFloat();
+      console.log(data);
+      });
+  }
   parseFloat() {
     for (let i in this.Cars) {
       this.priceP = this.Cars[i].stocks = parseFloat(this.Cars[i].stocks!.toString());

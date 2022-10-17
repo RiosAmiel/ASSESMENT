@@ -19,5 +19,7 @@ export class DataService {
     getCars(): Observable<Cars[]>{
       return this.http.get(`${environment.carsURL}`) as Observable<Cars[]>;
     }
-
+    getCarsCore():Observable<Cars[]>{
+      return this.http.get(`${environment.carsCoreUrl}`) as Observable<Cars[]>;
+    }
 }

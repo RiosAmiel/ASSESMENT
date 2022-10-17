@@ -4,6 +4,7 @@
 
 export const environment = {
   production: false,
+  carsCoreUrl: 'https://localhost:7161/api/Cars',
   apiURL: 'https://633bde94f11701a65f69b553.mockapi.io/Users',
   carsURL: 'https://633bde94f11701a65f69b553.mockapi.io/Cars'
 };
