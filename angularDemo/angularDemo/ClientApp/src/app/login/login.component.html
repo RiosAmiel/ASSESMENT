@@ -1,0 +1,16 @@
+<div class="login-card">
+    <mat-card>
+        <h4 class="login-label">Login</h4>
+            <form [formGroup]="form" class="login-panel" (ngSubmit)="LoginUser()">
+                <mat-form-field appearance="outline">
+                    <mat-label>Email:</mat-label>
+                    <input matInput type="text" [formControlName]="'email'" required id="email">
+                </mat-form-field>
+                <mat-form-field appearance="outline">
+                    <mat-label>Password:</mat-label>
+                    <input matInput type="password" [formControlName]="'password'" required id="password">
+                </mat-form-field>
+                <button mat-raised-button type="submit" [disabled]="!form.valid" id="loginbt">Login</button>
+            </form>
+    </mat-card>
+</div>

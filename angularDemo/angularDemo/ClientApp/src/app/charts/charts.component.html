@@ -1,0 +1,12 @@
+<div class="pie-chart">
+    <mat-card>
+        <ejs-accumulationchart [title]='title_V' [legendSettings]='legend' [tooltip]='tooltip'>
+            <e-accumulation-series-collection>
+                <e-accumulation-series type='Pie' [dataSource]='Cars' xName='car' yName='stocks' name='Car' 
+                [startAngle]="startAngle" [endAngle]="endAngle" innerRadius="40%"
+                radius="70%" [dataLabel]='dataLabel' explode=true explodeOffset='10%' [explodeIndex]='0'>
+                </e-accumulation-series>
+            </e-accumulation-series-collection>
+        </ejs-accumulationchart>
+    </mat-card>
+</div>

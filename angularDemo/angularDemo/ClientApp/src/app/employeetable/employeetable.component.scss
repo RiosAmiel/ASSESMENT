@@ -1,0 +1,26 @@
+.grid{
+    height: 800px;
+    width: 1550px;
+    margin-top: 30px;
+}
+.igx-grid-toolbar{
+    background-color: #711961;
+    .igx-grid-toolbar__title{
+        color: #FFFFFF;
+
+    }
+    span{
+        font-weight: 600;
+        margin-left: 10px;
+        padding-bottom: 2px;
+    }
+    igx-icon{
+        vertical-align:middle;
+    }
+    
+}
+.search{
+    display: inline-block;
+    align-self: center;
+    
+}

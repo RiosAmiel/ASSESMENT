@@ -1,0 +1,130 @@
+<div class="grid">
+  <igx-grid #grid1 
+  [data]="localCoreData" 
+  primaryKey="id" 
+  [allowFiltering]="true" 
+  [allowFiltering]="true" 
+  [rowEditable]="true" 
+  rowSelection="multiple"
+  columnSelection="multiple" 
+  [moving]="true">
+    <igx-column 
+    field="id" 
+    header="ID"  
+    width="100px" 
+    [sortable]="true" 
+    [filterable]="false" 
+    [editable]="false" 
+    [resizable]="false"
+    [pinned]="true">
+    </igx-column>
+    <igx-column 
+    field="fullname" 
+    header="Full Name"  
+    width="200px" 
+    [sortable]="true" 
+    [filterable]="false" 
+    [editable]="true" 
+    [resizable]="true"
+    [pinned]="true">
+    </igx-column>
+    <igx-column 
+    field="age" 
+    header="Age"  
+    width="200px" 
+    [sortable]="true" 
+    [filterable]="false" 
+    [editable]="true" 
+    [resizable]="true"
+    [pinned]="true">
+    </igx-column>
+    <igx-column 
+    field="birthplace" 
+    header="Birthplace"  
+    width="200px" 
+    [sortable]="true" 
+    [filterable]="false" 
+    [editable]="true" 
+    [resizable]="true"
+    [pinned]="true">
+    </igx-column>
+    <igx-column 
+    field="occupation" 
+    header="Occupation"
+    width="200px" 
+    [sortable]="true" 
+    [filterable]="true" 
+    [editable]="true" 
+    [resizable]="true" 
+    [groupable]="true">
+    </igx-column>
+    <igx-column 
+    field="email" 
+    header="Email" 
+    width="200px" 
+    [sortable]="true" 
+    [filterable]="true" 
+    [editable]="true" 
+    [resizable]="true">
+    </igx-column>
+      <igx-column 
+      field="IsActive" 
+      header="Is Active" 
+      width="140px" 
+      dataType="boolean" 
+      [sortable]="true" 
+      [filterable]="true"
+      [resizable]="true">
+      <ng-template igxCell let-cell="cell">
+        <igx-checkbox [ngModel]="cell.value" (ngModelChange)="cell.update($event)"></igx-checkbox>
+      </ng-template>
+    </igx-column>
+    <igx-grid-toolbar>
+      <igx-grid-toolbar-title>
+        <igx-prefix>
+          <igx-icon>
+            groups
+          </igx-icon>
+          <span>Employees</span>ignite
+        </igx-prefix>
+      </igx-grid-toolbar-title>
+      <div class="search">
+        <igx-input-group type="search" class="offset">
+          <igx-prefix>
+              <igx-icon *ngIf="searchText.length === 0">search</igx-icon>
+              <igx-icon *ngIf="searchText.length > 0" (click)="clearSearch()">clear</igx-icon>
+          </igx-prefix>
+          <input #search1 id="search1" igxInput placeholder="Search by Name" type="text" (ngModelChange)="grid.findNext(searchText, caseSensitive, exactMatch)"
+              (input)="filter($event)" />
+
+          <igx-suffix *ngIf="searchText.length > 0">
+              <div class="resultsText" *ngIf="grid.lastSearchInfo">
+                  <span *ngIf="grid.lastSearchInfo.matchInfoCache.length > 0">
+                      {{ grid.lastSearchInfo.activeMatchIndex + 1 }} of {{ grid.lastSearchInfo.matchInfoCache.length }}
+                      results
+                  </span>
+                  <span *ngIf="grid.lastSearchInfo.matchInfoCache.length === 0">
+                      No results
+                  </span>
+              </div>
+              <div class="searchButtons">
+                  <button igxButton="icon" igxRipple (click)="grid.findPrev(searchText, caseSensitive, exactMatch)">
+                      <igx-icon family="material">navigate_before</igx-icon>
+                  </button>
+                  <button igxButton="icon" igxRipple ="true" (click)="grid.findNext(searchText, caseSensitive, exactMatch)">
+                      <igx-icon family="material">navigate_next</igx-icon>
+                  </button>
+              </div>
+          </igx-suffix>
+      </igx-input-group>
+    </div>
+      <igx-grid-toolbar-actions>
+        <igx-grid-toolbar-pinning></igx-grid-toolbar-pinning>
+        <igx-grid-toolbar-hiding></igx-grid-toolbar-hiding>
+        <igx-grid-toolbar-exporter></igx-grid-toolbar-exporter>
+      </igx-grid-toolbar-actions>
+    </igx-grid-toolbar>
+    <igx-paginator
+    [perPage]="10"></igx-paginator>
+  </igx-grid>
+</div>
