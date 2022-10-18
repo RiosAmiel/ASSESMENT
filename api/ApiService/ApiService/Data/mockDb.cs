@@ -11,5 +11,6 @@ namespace ApiService.Data
         }
         //
         public DbSet<Cars> Cars { get; set; }
+        public DbSet<Users> Users { get; set; }
     }
 }

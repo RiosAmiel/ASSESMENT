@@ -69,5 +69,18 @@ namespace ApiService.Controllers
             }
             return NotFound("not found");
         }
+        [HttpDelete]
+        [Route("{id:guid}")]
+        public async Task<IActionResult> DeleteUser([FromRoute] Guid id)
+        {
+            var existingUser = await mockDb.Cars.FirstOrDefaultAsync(x => x.id == id);
+            if (existingUser != null)
+            {
+                mockDb.Cars.Remove(existingUser);
+                await mockDb.SaveChangesAsync();
+                return Ok(existingUser);
+            }
+            return NotFound("not found");
+        }
     }
 }

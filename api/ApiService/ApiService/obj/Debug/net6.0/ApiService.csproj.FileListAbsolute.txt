@@ -80,3 +80,11 @@ C:\Users\SBComp\Documents\GitHub\Assesment\api\ApiService\ApiService\obj\Debug\n
 C:\Users\SBComp\Documents\GitHub\Assesment\api\ApiService\ApiService\obj\Debug\net6.0\ApiService.pdb
 C:\Users\SBComp\Documents\GitHub\Assesment\api\ApiService\ApiService\obj\Debug\net6.0\ApiService.genruntimeconfig.cache
 C:\Users\SBComp\Documents\GitHub\Assesment\api\ApiService\ApiService\obj\Debug\net6.0\ref\ApiService.dll
+C:\Users\SBComp\Documents\GitHub\Assesment\api\ApiService\ApiService\bin\Debug\net6.0\Frontend\.eslintrc.json
+C:\Users\SBComp\Documents\GitHub\Assesment\api\ApiService\ApiService\bin\Debug\net6.0\Frontend\angular.json
+C:\Users\SBComp\Documents\GitHub\Assesment\api\ApiService\ApiService\bin\Debug\net6.0\Frontend\ignite-ui-cli.json
+C:\Users\SBComp\Documents\GitHub\Assesment\api\ApiService\ApiService\bin\Debug\net6.0\Frontend\package-lock.json
+C:\Users\SBComp\Documents\GitHub\Assesment\api\ApiService\ApiService\bin\Debug\net6.0\Frontend\package.json
+C:\Users\SBComp\Documents\GitHub\Assesment\api\ApiService\ApiService\bin\Debug\net6.0\Frontend\tsconfig.app.json
+C:\Users\SBComp\Documents\GitHub\Assesment\api\ApiService\ApiService\bin\Debug\net6.0\Frontend\tsconfig.json
+C:\Users\SBComp\Documents\GitHub\Assesment\api\ApiService\ApiService\bin\Debug\net6.0\Frontend\tsconfig.spec.json
