@@ -24,7 +24,6 @@ export class EmployeeTableComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {
-    this.PullUsers();
     this.PullCoreUsers();
   }
 

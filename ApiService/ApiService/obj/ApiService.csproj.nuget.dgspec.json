@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Users\\SBComp\\Documents\\GitHub\\Assesment\\api\\ApiService\\ApiService\\ApiService.csproj": {}
+    "C:\\Users\\SBComp\\Documents\\GitHub\\Assesment\\ApiService\\ApiService\\ApiService.csproj": {}
   },
   "projects": {
-    "C:\\Users\\SBComp\\Documents\\GitHub\\Assesment\\api\\ApiService\\ApiService\\ApiService.csproj": {
+    "C:\\Users\\SBComp\\Documents\\GitHub\\Assesment\\ApiService\\ApiService\\ApiService.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Users\\SBComp\\Documents\\GitHub\\Assesment\\api\\ApiService\\ApiService\\ApiService.csproj",
+        "projectUniqueName": "C:\\Users\\SBComp\\Documents\\GitHub\\Assesment\\ApiService\\ApiService\\ApiService.csproj",
         "projectName": "ApiService",
-        "projectPath": "C:\\Users\\SBComp\\Documents\\GitHub\\Assesment\\api\\ApiService\\ApiService\\ApiService.csproj",
+        "projectPath": "C:\\Users\\SBComp\\Documents\\GitHub\\Assesment\\ApiService\\ApiService\\ApiService.csproj",
         "packagesPath": "C:\\Users\\SBComp\\.nuget\\packages\\",
-        "outputPath": "C:\\Users\\SBComp\\Documents\\GitHub\\Assesment\\api\\ApiService\\ApiService\\obj\\",
+        "outputPath": "C:\\Users\\SBComp\\Documents\\GitHub\\Assesment\\ApiService\\ApiService\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
           "C:\\Users\\SBComp\\AppData\\Roaming\\NuGet\\NuGet.Config",

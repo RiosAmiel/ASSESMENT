@@ -5,7 +5,8 @@ namespace ApiService.Data
 {
     public class mockDb : DbContext
     {
-        public mockDb(DbContextOptions options) : base(options)
+        public mockDb(DbContextOptions options) 
+            : base(options)
         {
 
         }

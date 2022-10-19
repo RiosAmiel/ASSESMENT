@@ -33,12 +33,28 @@ if (app.Environment.IsDevelopment())
     app.UseSwaggerUI();
 }
 
-app.UseCors("Default");
+app.Use(async (context, next) =>
+{
+    await next();
 
-app.UseHttpsRedirection();
+    if (context.Response.StatusCode == 404 && !Path.HasExtension(context.Request.Path.Value))
+    {
+        context.Request.Path = "/index.html";
+        await next();
+    }
+});
+
+//app.UseHttpsRedirection();
+app.UseDefaultFiles();
+app.UseStaticFiles();
+
+
+app.UseCors(policy => policy.AllowAnyHeader().AllowAnyMethod().AllowAnyOrigin());
 
 app.UseAuthorization();
 
 app.MapControllers();
+
+
 
 app.Run();
