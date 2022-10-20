@@ -73,10 +73,10 @@ namespace ApiService.Controllers
         [Route("{id:guid}")]
         public async Task<IActionResult> DeleteUser([FromRoute] Guid id)
         {
-            var existingUser = await mockDb.Cars.FirstOrDefaultAsync(x => x.id == id);
+            var existingUser = await mockDb.Users.FirstOrDefaultAsync(x => x.id == id);
             if (existingUser != null)
             {
-                mockDb.Cars.Remove(existingUser);
+                mockDb.Users.Remove(existingUser);
                 await mockDb.SaveChangesAsync();
                 return Ok(existingUser);
             }

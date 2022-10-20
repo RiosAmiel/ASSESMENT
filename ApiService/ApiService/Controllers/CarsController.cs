@@ -20,7 +20,11 @@ namespace ApiService.Controllers
         public async Task<IActionResult> GetAllCars()
         {
           var cars = await mockDb.Cars.ToListAsync();
-            return Ok(cars);
+            if (cars != null)
+            {
+                return Ok(cars);
+            }
+            return NotFound("not found");
         }
 
         // GET CAR BY ID

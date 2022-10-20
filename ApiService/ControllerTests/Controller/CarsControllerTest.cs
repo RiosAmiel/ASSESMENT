@@ -1,61 +1,143 @@
 ﻿using ApiService.Controllers;
 using ApiService.Data;
 using ApiService.Models;
-using FakeItEasy;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using Moq;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using System.Xml.Linq;
+using Microsoft.Extensions.DependencyInjection;
 
 namespace ControllerTests.Controller
 {
+
+
     public class CarsControllerTest
     {
-        private const string ConnectionString = @"Server=(localdb)\mssqllocaldb;Database=EFTestSample;Trusted_Connection=True";
-
-        private static readonly object _lock = new();
-        private static bool _databaseInitialized;
-
-        public CarsControllerTest(mockDb _mockDb)
-        {
-
-        }
-
         [Fact]
-        public void CarCont_GetAllCars_returnOk()
+
+        public async Task GetAllCars_returnOk()
         {
             //Arrange
-            //create In Memory Database
-            var options = new DbContextOptionsBuilder<mockDb>()
-            .UseInMemoryDatabase(Guid.NewGuid().ToString());
-            //Act
-            using (var context = new mockDb(options.Options))
-            {
-                context.Cars.Add(new Cars
-                {
-                    id = new Guid(),
-                    car = "car1",
-                    stocks = "100",
-                    createdAt = "China",
-                });
+            var serviceProvider = new ServiceCollection()
+            .AddEntityFrameworkSqlServer()
+            .BuildServiceProvider();
 
-                context.Cars.Add(new Cars
-                {
-                    id = new Guid(),
-                    car = "car2",
-                    stocks = "200",
-                    createdAt = "China",
-                });
-                context.SaveChanges();
+            var options = new DbContextOptionsBuilder<mockDb>()
+                .UseInMemoryDatabase(databaseName: "mockDB")
+                .Options;
+
+            var context = new mockDb(options);
+
+            Seed(context);
+
+            var controller = new CarsController(context);
+            //Act
+            var actionResult = await controller.GetAllCars();
+
             //Assert
-                Assert.NotNull(context);
-            }
-                
+            var viewResult = Assert.IsType<OkObjectResult>(actionResult);
+            Assert.Equal(200, viewResult.StatusCode);
+        }
+        [Fact]
+        public async Task GetCar_Byid_returnOk()
+        {
+            //Arrange
+            var options = new DbContextOptionsBuilder<mockDb>()
+                .UseInMemoryDatabase(databaseName: "mockDB")
+                .Options;
+
+            var context = new mockDb(options);
+
+            Seed(context);
+
+            var controller = new CarsController(context);
+
+            //Act
+
+            var actionResult = await controller.GetCar(new Guid("ae90eaec-b67e-4332-82ac-dee4f9fa662b"));
+
+            //Assert
+            var okResult = Assert.IsType<OkObjectResult>(actionResult);
+            Assert.Equal(200, okResult.StatusCode);
+        }
+        [Fact]
+        public async Task AddCar_returnCreatedAtAction()
+        {
+            //Arrange
+            var options = new DbContextOptionsBuilder<mockDb>()
+                .UseInMemoryDatabase(databaseName: "mockDB")
+                .Options;
+
+            var context = new mockDb(options);
+
+            var controller = new CarsController(context);
+
+            //Act
+            Cars car = new Cars()
+            {
+                car = "Honda",
+                createdAt = "China",
+                stocks = "500"
+
+            };
+            var actionResult = await controller.AddCar(car);
+
+            //Assert
+            var okResult = Assert.IsType<CreatedAtActionResult>(actionResult);
+            Assert.Equal(201, okResult.StatusCode);
+        }
+        [Fact]
+        public async Task UpdateCar_returnOk()
+        {
+            //Arrange
+            var options = new DbContextOptionsBuilder<mockDb>()
+                .UseInMemoryDatabase(databaseName: "mockDB")
+                .Options;
+
+            var context = new mockDb(options);
+            Seed(context);
+            var controller = new CarsController(context);
+            //Act
+            Cars car = new Cars()
+            {
+                car = "Honda",
+                createdAt = "China",
+                stocks = "500"
+
+            };
+            var actionResult = await controller.UpdateCar(new Guid("ae90eaec-b67e-4332-82ac-dee4f9fa662b"), car);
+
+            //Assert
+            var okResult = Assert.IsType<OkObjectResult>(actionResult);
+            Assert.Equal(200, okResult.StatusCode);
+        }
+        [Fact]
+        public async Task DeleteCar_returnOk()
+        {
+            //Arrange
+            var options = new DbContextOptionsBuilder<mockDb>()
+                .UseInMemoryDatabase(databaseName: "mockDB")
+                .Options;
+
+            var context = new mockDb(options);
+            Seed(context);
+            var controller = new CarsController(context);
+            //Act
+            var actionResult = await controller.DeleteCar(new Guid("ae90eaec-b67e-4332-82ac-dee4f9fa662b"));
+
+            //Assert
+            var okResult = Assert.IsType<OkObjectResult>(actionResult);
+            Assert.Equal(200, okResult.StatusCode);
+
+        }
+        private void Seed(mockDb mockDb)
+        {
+            var cars = new Cars[]
+            {
+                new Cars {id = new Guid("ae90eaec-b67e-4332-82ac-dee4f9fa662b"), car = "Ferrari", createdAt = "China", stocks = "500" },
+                 new Cars { car = "Bugatti", createdAt = "China", stocks = "500" },
+                  new Cars { car = "Porsche", createdAt = "China", stocks = "500" }
+            };
+            mockDb.Cars.AddRange(cars);
+            mockDb.SaveChanges();
         }
     }
 }
