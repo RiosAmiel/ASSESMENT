@@ -24,7 +24,6 @@ namespace ControllerTests.Controller
                 .Options;
 
             var context = new mockDb(options);
-
             Seed(context);
             var controller = new UserController(context);
             //Act
@@ -32,8 +31,10 @@ namespace ControllerTests.Controller
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(actionResult);
+            var model = Assert.IsAssignableFrom<List<Users>>(okResult.Value);
             Assert.Equal(200, okResult.StatusCode);
-            
+            Assert.Equal(3, model.Count);
+
         }
         [Fact]
         public async Task GetUserbyid_returnOk()
@@ -52,6 +53,8 @@ namespace ControllerTests.Controller
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(actionResult);
+            var model = Assert.IsAssignableFrom<Users>(okResult.Value);
+            Assert.Equal("Amiel Rios", model.fullname);
             Assert.Equal(200, okResult.StatusCode);
         }
         [Fact]
@@ -80,6 +83,8 @@ namespace ControllerTests.Controller
 
             //Assert
             var okResult = Assert.IsType<CreatedAtActionResult>(actionResult);
+            var model = Assert.IsAssignableFrom<Users>(okResult.Value);
+            Assert.Equal("40", model.age);
             Assert.Equal(201, okResult.StatusCode);
         }
         [Fact]
@@ -108,6 +113,8 @@ namespace ControllerTests.Controller
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(actionResult);
+            var model = Assert.IsAssignableFrom<Users>(okResult.Value);
+            Assert.Equal("Charles Umbina", model.fullname);
             Assert.Equal(200, okResult.StatusCode);
         }
         [Fact]
@@ -126,6 +133,8 @@ namespace ControllerTests.Controller
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(actionResult);
+            var model = Assert.IsAssignableFrom<Users>(okResult.Value);
+            Assert.Equal("Amiel Rios", model.fullname);
             Assert.Equal(200, okResult.StatusCode);
         }
         private void Seed(mockDb mockDb)

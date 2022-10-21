@@ -1,6 +1,7 @@
 ﻿using ApiService.Controllers;
 using ApiService.Data;
 using ApiService.Models;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +13,6 @@ namespace ControllerTests.Controller
     public class CarsControllerTest
     {
         [Fact]
-
         public async Task GetAllCars_returnOk()
         {
             //Arrange
@@ -33,8 +33,11 @@ namespace ControllerTests.Controller
             var actionResult = await controller.GetAllCars();
 
             //Assert
-            var viewResult = Assert.IsType<OkObjectResult>(actionResult);
-            Assert.Equal(200, viewResult.StatusCode);
+            var okResult = Assert.IsType<OkObjectResult>(actionResult);
+            var model = Assert.IsAssignableFrom<List<Cars>>(okResult.Value);
+            Assert.Equal(200, okResult.StatusCode);
+            Assert.Equal(3, model.Count);
+
         }
         [Fact]
         public async Task GetCar_Byid_returnOk()
@@ -56,6 +59,8 @@ namespace ControllerTests.Controller
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(actionResult);
+            var model = Assert.IsAssignableFrom<Cars>(okResult.Value);
+            Assert.Equal("Ferrari", model.car);
             Assert.Equal(200, okResult.StatusCode);
         }
         [Fact]
@@ -82,6 +87,8 @@ namespace ControllerTests.Controller
 
             //Assert
             var okResult = Assert.IsType<CreatedAtActionResult>(actionResult);
+            var model = Assert.IsAssignableFrom<Cars>(okResult.Value);
+            Assert.Equal("Honda", model.car);
             Assert.Equal(201, okResult.StatusCode);
         }
         [Fact]
@@ -107,6 +114,8 @@ namespace ControllerTests.Controller
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(actionResult);
+            var model = Assert.IsAssignableFrom<Cars>(okResult.Value);
+            Assert.Equal("Honda", model.car);
             Assert.Equal(200, okResult.StatusCode);
         }
         [Fact]
@@ -125,6 +134,8 @@ namespace ControllerTests.Controller
 
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(actionResult);
+            var model = Assert.IsAssignableFrom<Cars>(okResult.Value);
+            Assert.Equal("Ferrari", model.car);
             Assert.Equal(200, okResult.StatusCode);
 
         }
