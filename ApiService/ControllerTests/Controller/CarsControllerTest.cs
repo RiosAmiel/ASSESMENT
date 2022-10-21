@@ -12,7 +12,8 @@ namespace ControllerTests.Controller
 
     public class CarsControllerTest
     {
-        [Fact]
+        [Fact(DisplayName = "GetAllCars Method")]
+
         public async Task GetAllCars_returnOk()
         {
             //Arrange
@@ -25,9 +26,6 @@ namespace ControllerTests.Controller
                 .Options;
 
             var context = new mockDb(options);
-
-            Seed(context);
-
             var controller = new CarsController(context);
             //Act
             var actionResult = await controller.GetAllCars();
@@ -39,7 +37,7 @@ namespace ControllerTests.Controller
             Assert.Equal(3, model.Count);
 
         }
-        [Fact]
+        [Fact(DisplayName = "GetCarById Method")]
         public async Task GetCar_Byid_returnOk()
         {
             //Arrange
@@ -63,7 +61,7 @@ namespace ControllerTests.Controller
             Assert.Equal("Ferrari", model.car);
             Assert.Equal(200, okResult.StatusCode);
         }
-        [Fact]
+        [Fact(DisplayName = "AddCar Method")]
         public async Task AddCar_returnCreatedAtAction()
         {
             //Arrange
@@ -91,7 +89,7 @@ namespace ControllerTests.Controller
             Assert.Equal("Honda", model.car);
             Assert.Equal(201, okResult.StatusCode);
         }
-        [Fact]
+        [Fact(DisplayName = "UpdateCar Method")]
         public async Task UpdateCar_returnOk()
         {
             //Arrange
@@ -100,7 +98,6 @@ namespace ControllerTests.Controller
                 .Options;
 
             var context = new mockDb(options);
-            Seed(context);
             var controller = new CarsController(context);
             //Act
             Cars car = new Cars()
@@ -118,7 +115,7 @@ namespace ControllerTests.Controller
             Assert.Equal("Honda", model.car);
             Assert.Equal(200, okResult.StatusCode);
         }
-        [Fact]
+        [Fact(DisplayName = "DeleteCar Method")]
         public async Task DeleteCar_returnOk()
         {
             //Arrange
@@ -127,7 +124,6 @@ namespace ControllerTests.Controller
                 .Options;
 
             var context = new mockDb(options);
-            Seed(context);
             var controller = new CarsController(context);
             //Act
             var actionResult = await controller.DeleteCar(new Guid("ae90eaec-b67e-4332-82ac-dee4f9fa662b"));
@@ -135,7 +131,7 @@ namespace ControllerTests.Controller
             //Assert
             var okResult = Assert.IsType<OkObjectResult>(actionResult);
             var model = Assert.IsAssignableFrom<Cars>(okResult.Value);
-            Assert.Equal("Ferrari", model.car);
+            Assert.Equal("Honda", model.car);
             Assert.Equal(200, okResult.StatusCode);
 
         }
