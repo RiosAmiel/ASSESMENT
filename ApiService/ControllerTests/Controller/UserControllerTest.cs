@@ -14,7 +14,7 @@ using System.Threading.Tasks;
 namespace ControllerTests.Controller
 {
 
-    public class UserControllerTest 
+    public class UserControllerTest: IClassFixture<UserControllerTest>
     {
         [Fact(DisplayName = "GetAllUsers Method")]
         public async Task GetAllUser_returnOk()
@@ -39,6 +39,7 @@ namespace ControllerTests.Controller
 
         }
         [Fact(DisplayName = "GetUserById Method")]
+
         public async Task GetUserbyid_returnOk()
         {
             //Arrange
@@ -60,6 +61,7 @@ namespace ControllerTests.Controller
             Assert.Equal(200, okResult.StatusCode);
         }
         [Fact(DisplayName = "AddUser Method")]
+
         public async Task AddUser_returnCreatedAtAction()
         {
             //Arrange
@@ -89,6 +91,7 @@ namespace ControllerTests.Controller
             Assert.Equal(201, okResult.StatusCode);
         }
         [Fact(DisplayName = "UpdateUser Method")]
+
         public async Task UpdateUser_returnOk()
         {
             //Arrange
@@ -118,6 +121,7 @@ namespace ControllerTests.Controller
             Assert.Equal(200, okResult.StatusCode);
         }
         [Fact(DisplayName = "DeleteUser Method")]
+
         public async Task DeleteUser_returnOk()
         {
             //Arrange

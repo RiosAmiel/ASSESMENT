@@ -10,10 +10,9 @@ namespace ControllerTests.Controller
 {
 
 
-    public class CarsControllerTest
+    public class CarsControllerTest: IClassFixture<CarsControllerTest>
     {
         [Fact(DisplayName = "GetAllCars Method")]
-
         public async Task GetAllCars_returnOk()
         {
             //Arrange
@@ -37,6 +36,7 @@ namespace ControllerTests.Controller
             Assert.Equal(3, model.Count);
 
         }
+
         [Fact(DisplayName = "GetCarById Method")]
         public async Task GetCar_Byid_returnOk()
         {
@@ -61,6 +61,7 @@ namespace ControllerTests.Controller
             Assert.Equal("Ferrari", model.car);
             Assert.Equal(200, okResult.StatusCode);
         }
+
         [Fact(DisplayName = "AddCar Method")]
         public async Task AddCar_returnCreatedAtAction()
         {
@@ -89,6 +90,7 @@ namespace ControllerTests.Controller
             Assert.Equal("Honda", model.car);
             Assert.Equal(201, okResult.StatusCode);
         }
+
         [Fact(DisplayName = "UpdateCar Method")]
         public async Task UpdateCar_returnOk()
         {
@@ -115,6 +117,7 @@ namespace ControllerTests.Controller
             Assert.Equal("Honda", model.car);
             Assert.Equal(200, okResult.StatusCode);
         }
+
         [Fact(DisplayName = "DeleteCar Method")]
         public async Task DeleteCar_returnOk()
         {
